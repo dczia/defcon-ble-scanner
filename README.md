@@ -16,7 +16,7 @@ Each data capture from the pollling sequences will be logged out. The output has
 PWNDC801 9e04 -81dB
 HACKED 9e04 -79dB
 F|5HT4P3 9e04 -74dB
-DCZBitrunnr 0108 -67dB
+DCZBitrunnr 5050 -67dB
 ~~~
 
 Obviously, first line of output is the date of the data capture. Following the date will be a line for each unique received broadcast. The nName of the device, manufacturer name, and signal strength (in decibels) will be logged out. 
