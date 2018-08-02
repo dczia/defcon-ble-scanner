@@ -7,8 +7,8 @@ from bluepy.btle import Scanner
 from termcolor import  colored
 
 """
-DC Zia 2017 BLE Scanner (Defcon 25)
-https://github.com/dczia/dc25-ble-scanner
+DC Zia BLE Scanner (DEF CON)
+https://github.com/dczia/defcon-ble-scanner
 http://dczia.net/
 https://twitter.com/DCZia505
 """
@@ -18,6 +18,7 @@ scanner = Scanner()
 
 # List of manufacturer ID's considered part of the DCZia group.
 US = ['5050']
+DCAPPEAR = ['dc26']
 
 class Neighbor():
 	"""
@@ -35,8 +36,8 @@ class Neighbor():
 
 def getNeighbors():
 	"""
-	Scans for 2 seconds and returns list of nearby BLE devices with the 0xDC19
-	(Defcon 25 Appearance).
+	Scans for 2 seconds and returns list of nearby BLE devices with the
+	Defcon Appearance.
 	"""
 	devices = scanner.scan(2)
 	neighbors = []
@@ -52,7 +53,7 @@ def getNeighbors():
 			if desc.lower() == "complete local name":
 				localName = value
 
-		if appearance == "dc19" and manufacturer is not None:
+		if appearance in DCAPPEAR and manufacturer is not None:
 			neighbors.append(Neighbor(appearance, manufacturer, localName, dev.rssi))
 	scanner.clear()
 	return neighbors
@@ -96,7 +97,7 @@ if __name__=='__main__':
 			for n in us:
 				print(colored("%s (%sdB)" % (n.localName, n.dB), "green"))
 
-			print(colored("[     0xDC19     ]", "cyan", attrs=["bold"]))
+			print(colored("[     0xDC26     ]", "cyan", attrs=["bold"]))
 			print(colored("========================================", "cyan", attrs=["bold"]))
 			if len(them) == 0:
 				print(colored("--", "cyan"))
