@@ -104,4 +104,4 @@ if __name__=='__main__':
 				print(colored("%s (0x%s, %sdB)" % (n.localName, n.manufacturer, n.dB), "cyan"))
 	except KeyboardInterrupt:
 		# kbye
-		print "Exiting..."
+		print("Exiting...")
