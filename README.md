@@ -3,13 +3,13 @@
 ## Understanding output
 (Please take a quick look at screenshot below then continue reading).
 
-This application will show all nearby devices broadcasting over Bluetooth Low Energy (BLE or BTLE). The [Appearance ID](https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.gap.appearance.xml) of `0xDC19` was used by Defcon 25 attendees that wanted their devices to be found; this application only accepts broadcasts with the `0xDC19` Appearance ID. 
+This application will show all nearby devices broadcasting over Bluetooth Low Energy (BLE or BTLE). The [Appearance ID](https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.gap.appearance.xml) of `0xDC19` was used by Defcon 25 attendees that wanted their devices to be found; this application only accepts broadcasts with the `0xDC19` Appearance ID.
 
 #### Screen output
 The output shown on your screen has two sections separated by [BLE Manufacturer Name](https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.manufacturer_name_string.xml). The green section shows members of your group (this is configured in the `US` variable of `scan.py`). The default value is `0x5050` which is manufacturer name for DC Zia at Defcon. The blue/cyan section is for all other manufacturer names at Defcon 25 and also shows the manufacturer name (e.g. `0x9e04`)
 
 #### Logging output
-Each data capture from the pollling sequences will be logged out. The output has a format like:
+Each data capture from the polling sequences will be logged out. The output has a format like:
 
 ~~~
 2017-07-29 11:58:09.921733
@@ -19,7 +19,7 @@ F|5HT4P3 9e04 -74dB
 DCZBitrunnr 5050 -67dB
 ~~~
 
-Obviously, first line of output is the date of the data capture. Following the date will be a line for each unique received broadcast. The nName of the device, manufacturer name, and signal strength (in decibels) will be logged out. 
+Obviously, first line of output is the date of the data capture. Following the date will be a line for each unique received broadcast. The nName of the device, manufacturer name, and signal strength (in decibels) will be logged out.
 
 ## Screenshots
 ![screen capture](http://i.imgur.com/Sbw7CCq.png)
@@ -33,7 +33,7 @@ Obviously, first line of output is the date of the data capture. Following the d
 ~~~
 # git clone https://github.com/dczia/dc25-ble-scanner.git
 # cd dc25-ble-scanner
-# virtualenv v
+# virtualenv-3 v
 # source v/bin/activate
 # pip install -r requirements.txt
 # sudo ./scan.py
