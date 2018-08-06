@@ -5,6 +5,7 @@ import time
 from datetime import datetime
 from bluepy.btle import Scanner
 from termcolor import  colored
+from badgebtle import BadgeBTLE
 
 """
 DC Zia 2017 BLE Scanner (Defcon 25)
@@ -13,49 +14,8 @@ http://dczia.net/
 https://twitter.com/DCZia505
 """
 
-# Initialize the BLE scanner
-scanner = Scanner()
-
 # List of manufacturer ID's considered part of the DCZia group.
 US = ['5050']
-
-class Neighbor():
-	"""
-	Basic field accessor class for scan data we care about.
-	"""
-	def __init__(self, appearance, manufacturer, localName, dB):
-		self.appearance = appearance
-		self.manufacturer = manufacturer
-		self.localName = localName
-		self.dB = dB
-
-	def __lt__(self, other):
-		# Sort by signal strength
-		return self.dB < other.dB
-
-def getNeighbors():
-	"""
-	Scans for 2 seconds and returns list of nearby BLE devices with the 0xDC19
-	(Defcon 25 Appearance).
-	"""
-	devices = scanner.scan(2)
-	neighbors = []
-	for dev in devices:
-		appearance = None
-		manufacturer = None
-		localName = None
-		for (adtype, desc, value) in dev.getScanData():
-			if desc.lower() == "appearance":
-				appearance = value.lower()
-			if desc.lower() == "manufacturer":
-				manufacturer = value[0:4]
-			if desc.lower() == "complete local name":
-				localName = value
-
-		if appearance == "dc19" and manufacturer is not None:
-			neighbors.append(Neighbor(appearance, manufacturer, localName, dev.rssi))
-	scanner.clear()
-	return neighbors
 
 def getus(neighbors):
 	""" Return list of devices that are considered "us" (part of DCZia)"""
@@ -77,9 +37,10 @@ def savetofile(neighbors):
 
 if __name__=='__main__':
 	try:
+		scanner = BadgeBTLE()
 		while True:
 			# Find all the nearby BLE devices, sort them, and save them to file.
-			neighbors = getNeighbors()
+			neighbors = scanner.scan()
 			neighbors.sort()
 			os.system('clear')
 			savetofile(neighbors)
